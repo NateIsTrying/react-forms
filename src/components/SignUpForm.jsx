@@ -31,7 +31,8 @@ const SignUpForm = ( {setToken }) => {
                 });
             const data = await response.json();
             console.log(data);
-            setToken(data.token)
+            const authToken = data.token;
+            setToken(authToken);
 
         } catch(error) {
             console.error(`Yup, handle submit screwed you.`, error)
