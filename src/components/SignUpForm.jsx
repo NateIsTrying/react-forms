@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const SignUpForm = ( {setToken }) => {
+const SignUpForm = ( { setToken } ) => {
     const [userName, setUserName] = useState('');
     const [passWord, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -35,7 +35,8 @@ const SignUpForm = ( {setToken }) => {
             setToken(authToken);
 
         } catch(error) {
-            console.error(`Yup, handle submit screwed you.`, error)
+            console.error(`Yup, handle submit screwed you.`, error);
+            setError('An error occurred during sign up.');
         }
     }
 
@@ -46,19 +47,21 @@ const SignUpForm = ( {setToken }) => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Username: 
-                    <input 
+                    <input
+                        type='text' 
                         onChange={onChangeName}
                     />
                 </label>
                 <br />
                 <label>
                     Password: 
-                    <input  
+                    <input
+                        type='password'  
                         onChange={onChangePassword}
                     />
                 </label>
                 <br />
-                <button>Submit</button>
+                <button type='submit'>Submit</button>
             </form>
         </>
         

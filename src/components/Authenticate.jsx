@@ -3,6 +3,7 @@ import {useState} from 'react';
 const Authenticate = ( { token } ) => {
     const [successMessage, setSuccessMessage] = useState(null);
     const [error, setError] = useState(null);
+    const [authUserName, setAuthUserName] = useState(null);
 
     const handleClick = async () => {
         try{
@@ -13,10 +14,10 @@ const Authenticate = ( { token } ) => {
                     Authorization: `Bearer ${token}`
                     }
                 });
-            const data = await response.json();
-            console.log(data.message);
-            setSuccessMessage(data.message);
-            
+            const authData = await response.json();            
+            setSuccessMessage(authData.message);
+            setAuthUserName(authData.data.username);
+
             } catch (error) {
             console.error(error.message);
         }
@@ -25,10 +26,11 @@ const Authenticate = ( { token } ) => {
 
     return (
         <>
-            <h2>AUTHENTICATE!!!</h2>
+            <h2>AUTHENTICATE</h2>
             {successMessage && <p>{successMessage}</p>}
             {error && <p>{error}</p>}
             <button onClick={handleClick}>Authenticate Token</button>
+            {authUserName && <h3>Thanks for Authenticating, {authUserName}!</h3>}
         </>
     )
 }
